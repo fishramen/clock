@@ -1,0 +1,85 @@
+var anglesun = 270;	// I wasn't sure how to create the circular motion, so I sourced this bit of the code from a sketch in p5.js by 'kchung'
+var scalar = 420;  
+var startsunx = 850;	//setting the starting points for the sun and moon
+var startsuny = 500;	
+
+var anglemoon = 90;
+var scalar = 420;
+var startmoonx = 850;
+var startmoony = 500;	
+
+
+function setup() {
+	
+	
+	createCanvas(windowWidth, windowHeight);
+	background(200);
+	shadow = second();
+	angleMode(DEGREES);
+	frameRate(1);
+	
+	
+	
+}
+
+
+function draw() {
+	clear();
+	fill(75);	//sun dial base
+	strokeWeight(5);
+	ellipse(width/2, height/2, 700, 400);
+	//fill(255, 234, 0); //sun
+	//strokeWeight(1);
+	//ellipse(820, 80, 100, 100);
+	fill(100); //sun dial arm
+	strokeWeight(5);
+	triangle(width/2, 275, width/2 - 50, height/2, width/2 + 50, height/2);
+	strokeWeight(10);
+	fill(1); //numbers
+	textSize(20);
+	text('12', width/2, height/2 - 175);
+	text('1', width/2 + 150, height/2 - 155);
+	text('2', width/2 + 275, height/2 - 90);
+	text('3', width/2 + 325, height/2);
+	text('4', width/2 + 275, height/2 + 90);
+	text('5', width/2 + 150, height/2 + 165);
+	text('6', width/2, height/2 + 190);
+	text('7', width/2 - 150, height/2 + 165);
+	text('8', width/2 - 275, height/2 + 90);
+	text('9', width/2 - 340, height/2);
+	text('10', width/2 - 275, height/2 - 90);
+	text('11', width/2 - 150, height/2 - 155);
+	
+	var x = startsunx + scalar * cos(anglesun);	//sun movement
+  var y = startsuny + scalar * sin(anglesun);
+  
+	fill(255, 234, 0); //sun
+	strokeWeight(1);
+	ellipse(x, y, 80);
+  anglesun++;
+	
+	
+	var k = startmoonx + scalar * cos(anglemoon);	//moon movement 
+  var j = startmoony + scalar * sin(anglemoon);
+	
+	fill(255);
+	strokeWeight(1);
+	ellipse(k, j, 80);
+	anglemoon++;
+
+	translate(windowWidth/2, windowHeight/2); //centering the shadow
+	
+	let sc = second();
+	//let mn = minute();
+	//let hr = hour();
+	
+	
+	push();
+	let shadow = map(second(), 0, 59, 0, 359); //movement of the shadow as time passes
+	rotate(shadow - 90);
+	stroke(10);
+	fill(0);
+	rect(0, 0, 150, 30); 
+	pop();
+}
+
